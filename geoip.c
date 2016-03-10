@@ -76,6 +76,7 @@ static int le_geoip;
 
 /* {{{ */
 zend_function_entry geoip_functions[] = {
+    PHP_FE(geoip_name_by_addr,   NULL)
 	PHP_FE(geoip_database_info,   NULL)
 	PHP_FE(geoip_country_code_by_name,   NULL)
 	PHP_FE(geoip_country_code3_by_name,   NULL)
@@ -234,6 +235,36 @@ PHP_MINFO_FUNCTION(geoip)
 	php_info_print_table_row(2, "geoip library version", buf);
 	php_info_print_table_end();
 	DISPLAY_INI_ENTRIES();
+}
+/* }}} */
+
+/* {{{ proto string geoip_name_by_addr( string hostname )
+   Returns the Net Speed found in the GeoIP Database */
+PHP_FUNCTION(geoip_name_by_addr)
+{
+        GeoIP * gi;
+        char * hostname = NULL;
+        int arglen;
+        char * netspeed;
+
+        if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &hostname, &arglen) == FAILURE) {
+                return;
+        }
+
+        if (GeoIP_db_avail(GEOIP_NETSPEED_EDITION)) {
+                gi = GeoIP_open_type(GEOIP_NETSPEED_EDITION, GEOIP_STANDARD);
+        }   else {
+                php_error_docref(NULL TSRMLS_CC, E_WARNING, "Required database not available at %s.", GeoIPDBFileName[GEOIP_NETSPEED_EDITION]);
+                return;
+        }
+
+        netspeed = GeoIP_name_by_addr(gi, hostname);
+        GeoIP_delete(gi);
+
+        if(netspeed == NULL) {
+                RETURN_FALSE;
+        }
+        RETURN_STRING((char*)netspeed, 1);
 }
 /* }}} */
 

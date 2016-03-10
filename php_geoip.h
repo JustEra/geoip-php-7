@@ -51,6 +51,7 @@ PHP_FUNCTION(geoip_database_info);
 PHP_FUNCTION(php_func);
 #include "geoip.def"
 #undef GEOIPDEF
+PHP_FUNCTION(geoip_name_by_addr);
 PHP_FUNCTION(geoip_continent_code_by_name);
 PHP_FUNCTION(geoip_org_by_name);
 PHP_FUNCTION(geoip_record_by_name);
