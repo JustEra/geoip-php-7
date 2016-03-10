@@ -264,7 +264,7 @@ PHP_FUNCTION(geoip_name_by_addr)
         if(netspeed == NULL) {
                 RETURN_FALSE;
         }
-        _RETURN_STRING((char*)netspeed, 1);
+        _RETURN_STRING((char*)netspeed);
 }
 /* }}} */
 
