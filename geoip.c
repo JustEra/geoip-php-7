@@ -76,7 +76,6 @@ static int le_geoip;
 
 /* {{{ */
 zend_function_entry geoip_functions[] = {
-    PHP_FE(geoip_name_by_addr,   NULL)
 	PHP_FE(geoip_database_info,   NULL)
 	PHP_FE(geoip_country_code_by_name,   NULL)
 	PHP_FE(geoip_country_code3_by_name,   NULL)
@@ -85,6 +84,7 @@ zend_function_entry geoip_functions[] = {
 	PHP_FE(geoip_org_by_name,   NULL)
 	PHP_FE(geoip_record_by_name,   NULL)
 	PHP_FE(geoip_id_by_name,   NULL)
+    PHP_FE(geoip_name_by_addr,   NULL)
 	PHP_FE(geoip_region_by_name,   NULL)
 	PHP_FE(geoip_isp_by_name,   NULL)
 	PHP_FE(geoip_db_avail,	NULL)
